@@ -10,8 +10,10 @@ use In2code\Powermail\Utility\ConfigurationUtility;
 use In2code\Powermail\Utility\DatabaseUtility;
 use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationExtensionNotConfiguredException;
 use TYPO3\CMS\Core\Configuration\Exception\ExtensionConfigurationPathDoesNotExistException;
+use TYPO3\CMS\Core\Context\LanguageAspect;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Persistence\Exception\InvalidQueryException;
+use TYPO3\CMS\Extbase\Persistence\QueryInterface;
 use TYPO3\CMS\Extbase\Persistence\QueryResultInterface;
 
 /**
@@ -30,6 +32,7 @@ class FieldRepository extends AbstractRepository
             $query = $this->createQuery();
             $query->getQuerySettings()->setRespectStoragePage(false);
             $query->getQuerySettings()->setRespectSysLanguage(false);
+            $this->overlayCurrentLanguage($query);
             $field = $query->matching($query->equals('uid', $uid))->execute()->getFirst();
             if ($field !== null) {
                 $result[] = $field;
@@ -55,6 +58,7 @@ class FieldRepository extends AbstractRepository
         $query = $this->createQuery();
         $query->getQuerySettings()->setRespectStoragePage(false);
         $query->getQuerySettings()->setRespectSysLanguage(false);
+        $this->overlayCurrentLanguage($query);
         $query->matching(
             $query->logicalAnd(
                 $query->equals('marker', $marker),
@@ -148,6 +152,7 @@ class FieldRepository extends AbstractRepository
         $query = $this->createQuery();
         $query->getQuerySettings()->setRespectStoragePage(false);
         $query->getQuerySettings()->setRespectSysLanguage(false);
+        $this->overlayCurrentLanguage($query);
         $query->matching(
             $query->logicalAnd(
                 $query->equals('marker', $marker),
@@ -229,5 +234,31 @@ class FieldRepository extends AbstractRepository
             ->setMaxResults(1)
             ->executeQuery()
             ->fetchOne();
+    }
+
+    /**
+     * PATCHED (patches/in2code-powermail-field-repository-language.patch):
+     * the language-blind lookups above still overlay the record in the request's
+     * language, exactly as Extbase's own Backend::getObjectByIdentifier() does for the
+     * same reason. Without it, a site language with fallbackType "free" (OVERLAYS_OFF)
+     * gets the default-language field un-overlaid; thawing it loads field.page →
+     * page.form and caches the default-language form under its plain uid, so a form
+     * re-shown after a failed validation renders in the default language, and
+     * {powermail_all} in mails lists default-language labels.
+     * Upstream: https://github.com/in2code-de/powermail/issues/1220 — drop this patch
+     * once that is fixed.
+     */
+    private function overlayCurrentLanguage(QueryInterface $query): void
+    {
+        $settings = $query->getQuerySettings();
+        $aspect = $settings->getLanguageAspect();
+        if ($aspect->getOverlayType() === LanguageAspect::OVERLAYS_OFF) {
+            $settings->setLanguageAspect(new LanguageAspect(
+                $aspect->getId(),
+                $aspect->getContentId(),
+                LanguageAspect::OVERLAYS_ON_WITH_FLOATING,
+                $aspect->getFallbackChain(),
+            ));
+        }
     }
 }
