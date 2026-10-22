@@ -167,9 +167,10 @@ class SendMailService
             return false;
         }
 
+        // MailMessage::isSent() is gone on v14 (Breaking-108097); as before, send() throws on failure
         GeneralUtility::makeInstance(MailerInterface::class)->send($message);
         $this->updateMail($email);
-        return $message->isSent();
+        return true;
     }
 
     /**

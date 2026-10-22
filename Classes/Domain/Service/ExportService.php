@@ -137,8 +137,9 @@ class ExportService
             $email->attachFromPath($this->getAbsolutePathAndFileName());
         }
 
+        // MailMessage::isSent() is gone on v14 (Breaking-108097); as before, send() throws on failure
         GeneralUtility::makeInstance(MailerInterface::class)->send($email);
-        return $email->isSent();
+        return true;
     }
 
     /**

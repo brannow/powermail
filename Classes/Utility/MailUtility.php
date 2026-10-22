@@ -32,7 +32,8 @@ class MailUtility
         $message->setFrom([$senderEmail => 'Sender']);
         $message->setSubject($subject);
         $message->text($body);
+        // MailMessage::isSent() is gone on v14 (Breaking-108097); as before, send() throws on failure
         \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Mail\MailerInterface::class)->send($message);
-        return $message->isSent();
+        return true;
     }
 }
