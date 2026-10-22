@@ -28,7 +28,11 @@ class Answer extends AbstractEntity
     const VALUE_TYPE_PASSWORD = 4;
 
     /**
-     * @var mixed
+     * string = the type Extbase mapped request values to up to TYPO3 v13 (from the default value).
+     * TYPO3 v14 no longer derives a type from `@var mixed` or the default, and property mapping of
+     * answers fails with NoPropertyTypesException.
+     *
+     * @var string
      */
     protected $value = '';
 
