@@ -40,7 +40,7 @@ class PluginPreviewRenderer extends StandardContentPreviewRenderer
      */
     public function renderPageModulePreviewContent(GridColumnItem $item): string
     {
-        $row = $item->getRecord();
+        $row = $item->getRow();
 
         if (is_null($row['pi_flexform'])) {
             return LocalizationUtility::translate('error_no_form');
