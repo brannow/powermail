@@ -8,7 +8,7 @@ use In2code\Powermail\Fluid\RestrictedStringRenderer;
 use TYPO3\CMS\Core\Core\Environment;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
 use TYPO3\CMS\Extbase\Configuration\ConfigurationManagerInterface;
-use TYPO3\CMS\Fluid\View\StandaloneView;
+use In2code\Powermail\Fluid\StandaloneView;
 
 /**
  * Class TemplateUtility

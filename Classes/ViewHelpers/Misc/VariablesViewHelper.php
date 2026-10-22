@@ -4,12 +4,13 @@ declare(strict_types=1);
 namespace In2code\Powermail\ViewHelpers\Misc;
 
 use In2code\Powermail\Domain\Model\Mail;
+use Psr\Http\Message\ServerRequestInterface;
 use In2code\Powermail\Domain\Repository\MailRepository;
 use In2code\Powermail\Domain\Service\ConfigurationService;
 use In2code\Powermail\Utility\ArrayUtility;
 use In2code\Powermail\Utility\TemplateUtility;
 use TYPO3\CMS\Core\Utility\GeneralUtility;
-use TYPO3\CMS\Fluid\View\StandaloneView;
+use In2code\Powermail\Fluid\StandaloneView;
 use TYPO3Fluid\Fluid\Core\ViewHelper\AbstractViewHelper;
 
 /**
@@ -50,7 +51,7 @@ class VariablesViewHelper extends AbstractViewHelper
         $function = $this->arguments['function'];
         $mailRepository = GeneralUtility::makeInstance(MailRepository::class);
         $parseObject = GeneralUtility::makeInstance(StandaloneView::class);
-        $parseObject->setRequest($this->renderingContext->getRequest());
+        $parseObject->setRequest($this->renderingContext->getAttribute(ServerRequestInterface::class));
         $parseObject->setTemplateSource($this->removePowermailAllParagraphTagWrap($this->renderChildren()));
         $parseObject->assignMultiple(
             ArrayUtility::htmlspecialcharsOnArray($mailRepository->getVariablesWithMarkersFromMail($mail))

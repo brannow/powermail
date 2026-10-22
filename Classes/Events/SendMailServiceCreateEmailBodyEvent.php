@@ -5,7 +5,7 @@ namespace In2code\Powermail\Events;
 
 use In2code\Powermail\Domain\Service\Mail\SendMailService;
 use Psr\Http\Message\ServerRequestInterface;
-use TYPO3\CMS\Fluid\View\StandaloneView;
+use In2code\Powermail\Fluid\StandaloneView;
 
 final class SendMailServiceCreateEmailBodyEvent
 {
