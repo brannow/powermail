@@ -64,7 +64,7 @@ class RateLimitMethod extends AbstractMethod
         $values = [];
         foreach ($restrictions as $restriction) {
             if ($restriction === '__ipAddress') {
-                $values[$restriction] = GeneralUtility::getIndpEnv('REMOTE_ADDR');
+                $values[$restriction] = $GLOBALS['TYPO3_REQUEST']->getAttribute('normalizedParams')->getRemoteAddress();
             } elseif ($restriction === '__formIdentifier') {
                 $values[$restriction] = $this->mail->getForm()->getUid();
             } elseif ($restriction[0] === '{') {

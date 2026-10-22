@@ -181,7 +181,7 @@ class FrontendUtility
     {
         if ($ipAddress === null) {
             // @codeCoverageIgnoreStart
-            $ipAddress = GeneralUtility::getIndpEnv('REMOTE_ADDR');
+            $ipAddress = $GLOBALS['TYPO3_REQUEST']->getAttribute('normalizedParams')->getRemoteAddress();
             // @codeCoverageIgnoreEnd
         }
 
@@ -220,12 +220,12 @@ class FrontendUtility
         ?string $testUrl = null
     ): string {
         $subfolder = '';
-        $typo3RequestHost = GeneralUtility::getIndpEnv('TYPO3_REQUEST_HOST');
+        $typo3RequestHost = $GLOBALS['TYPO3_REQUEST']->getAttribute('normalizedParams')->getRequestHost();
         if ($testHost) {
             $typo3RequestHost = $testHost;
         }
 
-        $typo3SiteUrl = GeneralUtility::getIndpEnv('TYPO3_SITE_URL');
+        $typo3SiteUrl = $GLOBALS['TYPO3_REQUEST']->getAttribute('normalizedParams')->getSiteUrl();
         if ($testUrl) {
             $typo3SiteUrl = $testUrl;
         }

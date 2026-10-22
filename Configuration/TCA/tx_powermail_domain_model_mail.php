@@ -38,9 +38,6 @@ $mailsTca = [
             'ignorePageTypeRestriction' => true,
         ],
         'iconfile' => ConfigurationUtility::getIconPath(Mail::TABLE_NAME . '.gif'),
-        'searchFields' => 'sender_mail, sender_name, subject, body',
-    ],
-    'interface' => [
     ],
     'types' => [
         '1' => [
@@ -87,6 +84,7 @@ $mailsTca = [
                 'type' => 'input',
                 'size' => 30,
                 'max' => 255,
+                'searchable' => false,
             ],
         ],
         'hidden' => [
@@ -103,6 +101,7 @@ $mailsTca = [
             'config' => [
                 'type' => 'datetime',
                 'default' => 0,
+                'searchable' => false,
             ],
         ],
         'endtime' => [
@@ -112,6 +111,7 @@ $mailsTca = [
             'config' => [
                 'type' => 'datetime',
                 'default' => 0,
+                'searchable' => false,
             ],
         ],
         'crdate' => [
@@ -121,6 +121,7 @@ $mailsTca = [
                 'type' => 'datetime',
                 'default' => 0,
                 'readOnly' => 1,
+                'searchable' => false,
             ],
         ],
         'receiver_mail' => [
@@ -131,6 +132,7 @@ $mailsTca = [
                 'type' => 'text',
                 'cols' => '30',
                 'rows' => '5',
+                'searchable' => false,
             ],
         ],
         'sender_mail' => [
@@ -242,6 +244,7 @@ $mailsTca = [
                 'size' => 13,
                 'eval' => 'trim',
                 'readOnly' => 1,
+                'searchable' => false,
             ],
         ],
         'time' => [
@@ -252,6 +255,7 @@ $mailsTca = [
                 'size' => 13,
                 'default' => 0,
                 'readOnly' => 1,
+                'searchable' => false,
             ],
         ],
         'sender_ip' => [
@@ -264,6 +268,7 @@ $mailsTca = [
                 'eval' => 'trim',
                 'readOnly' => 1,
                 'default' => '',
+                'searchable' => false,
             ],
         ],
         'user_agent' => [
@@ -276,6 +281,7 @@ $mailsTca = [
                 'eval' => 'trim',
                 'readOnly' => 1,
                 'default' => '',
+                'searchable' => false,
             ],
         ],
         'marketing_referer_domain' => [
@@ -287,6 +293,7 @@ $mailsTca = [
                 'size' => 30,
                 'readOnly' => 1,
                 'default' => '',
+                'searchable' => false,
             ],
         ],
         'marketing_referer' => [
@@ -299,6 +306,7 @@ $mailsTca = [
                 'rows' => '5',
                 'readOnly' => 1,
                 'default' => '',
+                'searchable' => false,
             ],
         ],
         'marketing_country' => [
@@ -310,6 +318,7 @@ $mailsTca = [
                 'size' => 30,
                 'readOnly' => 1,
                 'default' => '',
+                'searchable' => false,
             ],
         ],
         'marketing_mobile_device' => [
@@ -342,6 +351,7 @@ $mailsTca = [
                 'size' => 30,
                 'readOnly' => 1,
                 'default' => '',
+                'searchable' => false,
             ],
         ],
         'marketing_page_funnel' => [
@@ -354,6 +364,7 @@ $mailsTca = [
                 'rows' => '5',
                 'readOnly' => 1,
                 'default' => '',
+                'searchable' => false,
             ],
         ],
         'uid' => [

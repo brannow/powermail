@@ -23,7 +23,7 @@ class IpBlacklistMethod extends AbstractMethod
      */
     public function spamCheck(): bool
     {
-        return in_array(GeneralUtility::getIndpEnv('REMOTE_ADDR'), $this->getValues());
+        return in_array($GLOBALS['TYPO3_REQUEST']->getAttribute('normalizedParams')->getRemoteAddress(), $this->getValues());
     }
 
     /**

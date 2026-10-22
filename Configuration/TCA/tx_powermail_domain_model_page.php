@@ -28,9 +28,6 @@ $pagesTca = [
             'ignorePageTypeRestriction' => true,
         ],
         'iconfile' => ConfigurationUtility::getIconPath(Page::TABLE_NAME . '.gif'),
-        'searchFields' => 'title',
-    ],
-    'interface' => [
     ],
     'types' => [
         '1' => [
@@ -77,6 +74,7 @@ $pagesTca = [
                 'type' => 'input',
                 'size' => 30,
                 'max' => 255,
+                'searchable' => false,
             ],
         ],
         'hidden' => [
@@ -93,6 +91,7 @@ $pagesTca = [
             'config' => [
                 'type' => 'datetime',
                 'default' => 0,
+                'searchable' => false,
             ],
         ],
         'endtime' => [
@@ -102,6 +101,7 @@ $pagesTca = [
             'config' => [
                 'type' => 'datetime',
                 'default' => 0,
+                'searchable' => false,
             ],
         ],
         'title' => [

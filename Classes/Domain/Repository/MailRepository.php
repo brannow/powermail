@@ -588,7 +588,7 @@ class MailRepository extends AbstractRepository
     protected function getSenderMailFromDefault(string $default): string
     {
         $email = LocalizationUtility::translate('error_no_sender_email') . '@';
-        $email .= str_replace('www.', '', GeneralUtility::getIndpEnv('TYPO3_HOST_ONLY'));
+        $email .= str_replace('www.', '', $GLOBALS['TYPO3_REQUEST']->getAttribute('normalizedParams')->getRequestHostOnly());
         if (GeneralUtility::validEmail(ConfigurationUtility::getDefaultMailFromAddress())) {
             $email = ConfigurationUtility::getDefaultMailFromAddress();
         }

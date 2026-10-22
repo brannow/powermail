@@ -43,7 +43,7 @@ class MailFactory
             ->setReceiverMail($settings['receiver']['email'])
             ->setSpamFactor(SessionUtility::getSpamFactorFromSession())
             ->setTime((time() - SessionUtility::getFormStartFromSession($mail->getForm()->getUid(), $settings)))
-            ->setUserAgent(GeneralUtility::getIndpEnv('HTTP_USER_AGENT'))
+            ->setUserAgent($GLOBALS['TYPO3_REQUEST']->getAttribute('normalizedParams')->getHttpUserAgent())
             ->setMarketingRefererDomain($marketingInfos['refererDomain'])
             ->setMarketingReferer($marketingInfos['referer'])
             ->setMarketingCountry($marketingInfos['country'])
@@ -108,7 +108,7 @@ class MailFactory
     protected function setSenderIp(Mail $mail): void
     {
         if (!ConfigurationUtility::isDisableIpLogActive()) {
-            $mail->setSenderIp(GeneralUtility::getIndpEnv('REMOTE_ADDR'));
+            $mail->setSenderIp($GLOBALS['TYPO3_REQUEST']->getAttribute('normalizedParams')->getRemoteAddress());
         }
     }
 

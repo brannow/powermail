@@ -17,7 +17,7 @@ class IpBreaker extends AbstractBreaker
     public function isDisabled(): bool
     {
         foreach ($this->getIpAddresses() as $ipAddress) {
-            if ($this->isIpMatching(GeneralUtility::getIndpEnv('REMOTE_ADDR'), $ipAddress)) {
+            if ($this->isIpMatching($GLOBALS['TYPO3_REQUEST']->getAttribute('normalizedParams')->getRemoteAddress(), $ipAddress)) {
                 return true;
             }
         }

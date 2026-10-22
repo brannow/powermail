@@ -138,24 +138,24 @@ class FormController extends AbstractController
      * @return ResponseInterface
      * @throws Exception
      */
-    #[ExtbaseAnnotation\Validate(['validator' => \In2code\Powermail\Domain\Validator\UploadValidator::class, 'param' => 'mail'])]
-    #[ExtbaseAnnotation\Validate(['validator' => \In2code\Powermail\Domain\Validator\InputValidator::class, 'param' => 'mail'])]
-    #[ExtbaseAnnotation\Validate(['validator' => \In2code\Powermail\Domain\Validator\PasswordValidator::class, 'param' => 'mail'])]
-    #[ExtbaseAnnotation\Validate(['validator' => \In2code\Powermail\Domain\Validator\CaptchaValidator::class, 'param' => 'mail'])]
-    #[ExtbaseAnnotation\Validate(['validator' => \In2code\Powermail\Domain\Validator\SpamShieldValidator::class, 'param' => 'mail'])]
-    #[ExtbaseAnnotation\Validate(['validator' => \In2code\Powermail\Domain\Validator\UniqueValidator::class, 'param' => 'mail'])]
-    #[ExtbaseAnnotation\Validate(['validator' => \In2code\Powermail\Domain\Validator\ForeignValidator::class, 'param' => 'mail'])]
-    #[ExtbaseAnnotation\Validate(['validator' => \In2code\Powermail\Domain\Validator\CustomValidator::class, 'param' => 'mail'])]
-    public function confirmationAction(Mail $mail): ResponseInterface
+    public function confirmationAction(
+        #[\TYPO3\CMS\Extbase\Attribute\Validate(validator: \In2code\Powermail\Domain\Validator\UploadValidator::class)]
+        #[\TYPO3\CMS\Extbase\Attribute\Validate(validator: \In2code\Powermail\Domain\Validator\InputValidator::class)]
+        #[\TYPO3\CMS\Extbase\Attribute\Validate(validator: \In2code\Powermail\Domain\Validator\PasswordValidator::class)]
+        #[\TYPO3\CMS\Extbase\Attribute\Validate(validator: \In2code\Powermail\Domain\Validator\CaptchaValidator::class)]
+        #[\TYPO3\CMS\Extbase\Attribute\Validate(validator: \In2code\Powermail\Domain\Validator\SpamShieldValidator::class)]
+        #[\TYPO3\CMS\Extbase\Attribute\Validate(validator: \In2code\Powermail\Domain\Validator\UniqueValidator::class)]
+        #[\TYPO3\CMS\Extbase\Attribute\Validate(validator: \In2code\Powermail\Domain\Validator\ForeignValidator::class)]
+        #[\TYPO3\CMS\Extbase\Attribute\Validate(validator: \In2code\Powermail\Domain\Validator\CustomValidator::class)]
+        Mail $mail
+    ): ResponseInterface
     {
         if ($mail->getUid() !== null) {
             return (new ForwardResponse('form'))->withoutArguments();
         }
-
         $event = new FormControllerConfirmationActionEvent($mail, $this);
         $this->eventDispatcher->dispatch($event);
         $mail = $event->getMail();
-
         /** @noinspection PhpUnhandledExceptionInspection */
         $this->dataProcessorRunner->callDataProcessors(
             $mail,
@@ -164,7 +164,6 @@ class FormController extends AbstractController
             $this->contentObject
         );
         $this->prepareOutput($mail);
-
         return $this->htmlResponse();
     }
 
@@ -189,25 +188,26 @@ class FormController extends AbstractController
      * @return ResponseInterface
      * @throws Exception
      */
-    #[ExtbaseAnnotation\Validate(['validator' => \In2code\Powermail\Domain\Validator\UploadValidator::class, 'param' => 'mail'])]
-    #[ExtbaseAnnotation\Validate(['validator' => \In2code\Powermail\Domain\Validator\InputValidator::class, 'param' => 'mail'])]
-    #[ExtbaseAnnotation\Validate(['validator' => \In2code\Powermail\Domain\Validator\PasswordValidator::class, 'param' => 'mail'])]
-    #[ExtbaseAnnotation\Validate(['validator' => \In2code\Powermail\Domain\Validator\CaptchaValidator::class, 'param' => 'mail'])]
-    #[ExtbaseAnnotation\Validate(['validator' => \In2code\Powermail\Domain\Validator\SpamShieldValidator::class, 'param' => 'mail'])]
-    #[ExtbaseAnnotation\Validate(['validator' => \In2code\Powermail\Domain\Validator\UniqueValidator::class, 'param' => 'mail'])]
-    #[ExtbaseAnnotation\Validate(['validator' => \In2code\Powermail\Domain\Validator\ForeignValidator::class, 'param' => 'mail'])]
-    #[ExtbaseAnnotation\Validate(['validator' => \In2code\Powermail\Domain\Validator\CustomValidator::class, 'param' => 'mail'])]
-    public function createAction(Mail $mail, string $hash = ''): ResponseInterface
+    public function createAction(
+        #[\TYPO3\CMS\Extbase\Attribute\Validate(validator: \In2code\Powermail\Domain\Validator\UploadValidator::class)]
+        #[\TYPO3\CMS\Extbase\Attribute\Validate(validator: \In2code\Powermail\Domain\Validator\InputValidator::class)]
+        #[\TYPO3\CMS\Extbase\Attribute\Validate(validator: \In2code\Powermail\Domain\Validator\PasswordValidator::class)]
+        #[\TYPO3\CMS\Extbase\Attribute\Validate(validator: \In2code\Powermail\Domain\Validator\CaptchaValidator::class)]
+        #[\TYPO3\CMS\Extbase\Attribute\Validate(validator: \In2code\Powermail\Domain\Validator\SpamShieldValidator::class)]
+        #[\TYPO3\CMS\Extbase\Attribute\Validate(validator: \In2code\Powermail\Domain\Validator\UniqueValidator::class)]
+        #[\TYPO3\CMS\Extbase\Attribute\Validate(validator: \In2code\Powermail\Domain\Validator\ForeignValidator::class)]
+        #[\TYPO3\CMS\Extbase\Attribute\Validate(validator: \In2code\Powermail\Domain\Validator\CustomValidator::class)]
+        Mail $mail,
+        string $hash = ''
+    ): ResponseInterface
     {
         if ($mail->getUid() !== null && !HashUtility::isHashValid($hash, $mail)) {
             return (new ForwardResponse('form'))->withoutArguments();
         }
-
         $event = new FormControllerCreateActionBeforeRenderViewEvent($mail, $hash, $this);
         $this->eventDispatcher->dispatch($event);
         $mail = $event->getMail();
         $hash = $event->getHash();
-
         /** @noinspection PhpUnhandledExceptionInspection */
         $this->dataProcessorRunner->callDataProcessors(
             $mail,
@@ -228,7 +228,6 @@ class FormController extends AbstractController
             $mail = $event->getMail();
             $hash = $event->getHash();
         }
-
         if ($this->isNoOptin($mail, $hash)) {
             $this->sendMailPreflight($mail, $hash);
         } else {
@@ -241,21 +240,16 @@ class FormController extends AbstractController
             $mailPreflight->sendOptinConfirmationMail($mail);
             $this->view->assign('optinActive', true);
         }
-
         if ($this->isMailPersistActive($hash) && $isSavingOfMailAllowed) {
             $this->mailRepository->update($mail);
             $this->persistenceManager->persistAll();
         }
-
         $this->cleanupCaptchaDataInSession($mail);
-
         $event = new FormControllerCreateActionAfterSubmitViewEvent($mail, $hash, $this);
         $this->eventDispatcher->dispatch($event);
         $mail = $event->getMail();
         $hash = $event->getHash();
-
         $this->prepareOutput($mail);
-
         $finisherRunner = GeneralUtility::makeInstance(FinisherRunner::class);
         /** @noinspection PhpUnhandledExceptionInspection */
         $finisherRunner->callFinishers(
@@ -265,7 +259,6 @@ class FormController extends AbstractController
             $this->settings,
             $this->contentObject
         );
-
         return $this->htmlResponse();
     }
 

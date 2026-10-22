@@ -14,8 +14,8 @@ use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
  * If there are any TEXT legacy fields in the database, that have a NULL value
  * update them with an empty string.
  */
-#[UpgradeWizard('powermailTextNullUpdateWizard')]
-class PowermailTextNullUpdateWizard implements UpgradeWizardInterface
+#[\TYPO3\CMS\Core\Attribute\UpgradeWizard('powermailTextNullUpdateWizard')]
+class PowermailTextNullUpdateWizard implements \TYPO3\CMS\Core\Upgrades\UpgradeWizardInterface
 {
     public function getTitle(): string
     {
@@ -76,7 +76,7 @@ class PowermailTextNullUpdateWizard implements UpgradeWizardInterface
     public function getPrerequisites(): array
     {
         return [
-            DatabaseUpdatedPrerequisite::class,
+            \TYPO3\CMS\Core\Upgrades\DatabaseUpdatedPrerequisite::class,
         ];
     }
 }

@@ -255,9 +255,6 @@ $fieldsTca = [
             'ignorePageTypeRestriction' => true,
         ],
         'iconfile' => ConfigurationUtility::getIconPath(Field::TABLE_NAME . '.gif'),
-        'searchFields' => 'title',
-    ],
-    'interface' => [
     ],
     'palettes' => [
         '1' => [
@@ -400,6 +397,7 @@ $fieldsTca = [
                 'type' => 'input',
                 'size' => 30,
                 'max' => 255,
+                'searchable' => false,
             ],
         ],
         'hidden' => [
@@ -416,6 +414,7 @@ $fieldsTca = [
             'config' => [
                 'type' => 'datetime',
                 'default' => 0,
+                'searchable' => false,
             ],
         ],
         'endtime' => [
@@ -425,6 +424,7 @@ $fieldsTca = [
             'config' => [
                 'type' => 'datetime',
                 'default' => 0,
+                'searchable' => false,
             ],
         ],
         'title' => [
@@ -568,6 +568,7 @@ $fieldsTca = [
                 'cols' => '32',
                 'rows' => '5',
                 'default' => '',
+                'searchable' => false,
             ],
         ],
         'path' => [
@@ -578,6 +579,7 @@ $fieldsTca = [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim',
+                'searchable' => false,
             ],
         ],
         'content_element' => [
@@ -601,6 +603,7 @@ $fieldsTca = [
                 'cols' => '32',
                 'rows' => '5',
                 'default' => '',
+                'searchable' => false,
             ],
         ],
         'sender_email' => [
@@ -641,6 +644,7 @@ $fieldsTca = [
                 'rows' => '1',
                 'default' => '',
                 'eval' => 'trim',
+                'searchable' => false,
             ],
             'displayCond' => 'FIELD:mandatory:REQ:true',
         ],
@@ -816,6 +820,7 @@ $fieldsTca = [
             'config' => [
                 'type' => 'input',
                 'size' => 30,
+                'searchable' => false,
             ],
             'displayCond' => 'FIELD:validation:>:5',
         ],
@@ -828,6 +833,7 @@ $fieldsTca = [
                 'cols' => '26',
                 'rows' => '2',
                 'default' => '',
+                'searchable' => false,
             ],
         ],
         'placeholder' => [
@@ -839,6 +845,7 @@ $fieldsTca = [
                 'cols' => '26',
                 'rows' => '2',
                 'default' => '',
+                'searchable' => false,
             ],
         ],
         'placeholder_repeat' => [
@@ -850,6 +857,7 @@ $fieldsTca = [
                 'cols' => '26',
                 'rows' => '2',
                 'default' => '',
+                'searchable' => false,
             ],
         ],
         'feuser_value' => [
@@ -931,6 +939,7 @@ $fieldsTca = [
                 'size' => 30,
                 'eval' => 'trim',
                 'default' => '',
+                'searchable' => false,
             ],
         ],
         'css' => [
@@ -1029,6 +1038,7 @@ $fieldsTca = [
                 'type' => 'input',
                 'size' => 30,
                 'eval' => 'trim,alphanum_x,lower,nospace',
+                'searchable' => false,
             ],
             'displayCond' => 'FIELD:own_marker_select:REQ:true',
         ],
@@ -1053,6 +1063,7 @@ $fieldsTca = [
                 'cols' => '26',
                 'rows' => '2',
                 'eval' => 'trim',
+                'searchable' => false,
             ],
         ],
         'page' => [
@@ -1087,6 +1098,7 @@ $fieldsTca = [
                 'behaviour' => [
                     'allowLanguageSynchronization' => true,
                 ],
+                'searchable' => false,
             ],
             'displayCond' => [
                 'AND' => [

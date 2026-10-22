@@ -13,8 +13,8 @@ use TYPO3\CMS\Install\Attribute\UpgradeWizard;
 use TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
 use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
-#[UpgradeWizard('powermailPluginUpdater')]
-class PowermailPluginUpdater implements UpgradeWizardInterface
+#[\TYPO3\CMS\Core\Attribute\UpgradeWizard('powermailPluginUpdater')]
+class PowermailPluginUpdater implements \TYPO3\CMS\Core\Upgrades\UpgradeWizardInterface
 {
     private const MIGRATION_SETTINGS = [
         [
@@ -64,7 +64,7 @@ class PowermailPluginUpdater implements UpgradeWizardInterface
     public function getPrerequisites(): array
     {
         return [
-            DatabaseUpdatedPrerequisite::class,
+            \TYPO3\CMS\Core\Upgrades\DatabaseUpdatedPrerequisite::class,
         ];
     }
 

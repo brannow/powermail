@@ -19,8 +19,8 @@ use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
  * - tx_powermail_domain_model_field.pages to .page and
  * - tx_powermail_domain_model_pages.forms to .form
  */
-#[UpgradeWizard('powermailRelationUpdateWizard')]
-class PowermailRelationUpdateWizard implements UpgradeWizardInterface
+#[\TYPO3\CMS\Core\Attribute\UpgradeWizard('powermailRelationUpdateWizard')]
+class PowermailRelationUpdateWizard implements \TYPO3\CMS\Core\Upgrades\UpgradeWizardInterface
 {
     public function getTitle(): string
     {
@@ -65,7 +65,7 @@ class PowermailRelationUpdateWizard implements UpgradeWizardInterface
     public function getPrerequisites(): array
     {
         return [
-            DatabaseUpdatedPrerequisite::class,
+            \TYPO3\CMS\Core\Upgrades\DatabaseUpdatedPrerequisite::class,
         ];
     }
 

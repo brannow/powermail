@@ -19,8 +19,8 @@ use TYPO3\CMS\Install\Attribute\UpgradeWizard;
 use TYPO3\CMS\Install\Updates\DatabaseUpdatedPrerequisite;
 use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
 
-#[UpgradeWizard('powermailPermissionUpdater')]
-class PowermailPermissionUpdater implements UpgradeWizardInterface
+#[\TYPO3\CMS\Core\Attribute\UpgradeWizard('powermailPermissionUpdater')]
+class PowermailPermissionUpdater implements \TYPO3\CMS\Core\Upgrades\UpgradeWizardInterface
 {
     public function getTitle(): string
     {
@@ -36,7 +36,7 @@ class PowermailPermissionUpdater implements UpgradeWizardInterface
     public function getPrerequisites(): array
     {
         return [
-            DatabaseUpdatedPrerequisite::class,
+            \TYPO3\CMS\Core\Upgrades\DatabaseUpdatedPrerequisite::class,
         ];
     }
 

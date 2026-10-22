@@ -19,8 +19,8 @@ use TYPO3\CMS\Install\Updates\UpgradeWizardInterface;
  * - tx_powermail_domain_model_answer.sys_language_uid=-1
  * for existing values
  */
-#[UpgradeWizard('powermailLanguageUpdateWizard')]
-class PowermailLanguageUpdateWizard implements UpgradeWizardInterface
+#[\TYPO3\CMS\Core\Attribute\UpgradeWizard('powermailLanguageUpdateWizard')]
+class PowermailLanguageUpdateWizard implements \TYPO3\CMS\Core\Upgrades\UpgradeWizardInterface
 {
     public function getTitle(): string
     {
@@ -67,7 +67,7 @@ class PowermailLanguageUpdateWizard implements UpgradeWizardInterface
     public function getPrerequisites(): array
     {
         return [
-            DatabaseUpdatedPrerequisite::class,
+            \TYPO3\CMS\Core\Upgrades\DatabaseUpdatedPrerequisite::class,
         ];
     }
 

@@ -28,8 +28,6 @@ $answersTca = [
         ],
         'iconfile' => ConfigurationUtility::getIconPath(Answer::TABLE_NAME . '.gif'),
     ],
-    'interface' => [
-    ],
     'types' => [
         '1' => ['showitem' => 'value, value_type, field, mail'],
     ],

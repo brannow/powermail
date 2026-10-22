@@ -161,7 +161,7 @@ class SpamShieldValidator extends AbstractValidator
     {
         if (GeneralUtility::validEmail($this->settings['spamshield']['email'] ?? '')) {
             $senderEmail = $this->settings['spamshield']['senderEmail'] ?:
-                    'powermail@' . GeneralUtility::getIndpEnv('TYPO3_HOST_ONLY');
+                    'powermail@' . $GLOBALS['TYPO3_REQUEST']->getAttribute('normalizedParams')->getRequestHostOnly();
             MailUtility::sendPlainMail(
                 $this->settings['spamshield']['email'],
                 $senderEmail,
@@ -335,7 +335,7 @@ class SpamShieldValidator extends AbstractValidator
      */
     protected function getIpAddress(): string
     {
-        return ConfigurationUtility::isDisableIpLogActive() ? '' : GeneralUtility::getIndpEnv('REMOTE_ADDR');
+        return ConfigurationUtility::isDisableIpLogActive() ? '' : $GLOBALS['TYPO3_REQUEST']->getAttribute('normalizedParams')->getRemoteAddress();
     }
 
     /**

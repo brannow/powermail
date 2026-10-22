@@ -27,9 +27,6 @@ $formsTca = [
             'ignorePageTypeRestriction' => true,
         ],
         'iconfile' => ConfigurationUtility::getIconPath(Form::TABLE_NAME . '.gif'),
-        'searchFields' => 'title',
-    ],
-    'interface' => [
     ],
     'types' => [
         '1' => [
@@ -77,6 +74,7 @@ $formsTca = [
                 'type' => 'input',
                 'size' => 30,
                 'max' => 255,
+                'searchable' => false,
             ],
         ],
         'hidden' => [
@@ -93,6 +91,7 @@ $formsTca = [
             'config' => [
                 'type' => 'datetime',
                 'default' => 0,
+                'searchable' => false,
             ],
         ],
         'endtime' => [
@@ -102,6 +101,7 @@ $formsTca = [
             'config' => [
                 'type' => 'datetime',
                 'default' => 0,
+                'searchable' => false,
             ],
         ],
         'title' => [

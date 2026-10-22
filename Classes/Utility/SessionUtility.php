@@ -235,7 +235,7 @@ class SessionUtility
             'country' => $country,
             'mobileDevice' => $mobileDevice,
             'frontendLanguage' => $language,
-            'browserLanguage' => GeneralUtility::getIndpEnv('HTTP_ACCEPT_LANGUAGE'),
+            'browserLanguage' => $GLOBALS['TYPO3_REQUEST']->getAttribute('normalizedParams')->getHttpAcceptLanguage(),
             'pageFunnel' => [$pid],
         ];
     }

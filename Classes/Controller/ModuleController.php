@@ -293,7 +293,7 @@ class ModuleController extends AbstractController
     {
         if ($email !== null && GeneralUtility::validEmail($email)) {
             $body = 'New Test Email from User ' . BackendUtility::getPropertyFromBackendUser('username');
-            $body .= ' (' . GeneralUtility::getIndpEnv('HTTP_HOST') . ')';
+            $body .= ' (' . $this->request->getAttribute('normalizedParams')->getHttpHost() . ')';
             $senderEmail = ConfigurationUtility::getDefaultMailFromAddress('powermail@domain.net');
             $this->moduleTemplate->assignMultiple(
                 [

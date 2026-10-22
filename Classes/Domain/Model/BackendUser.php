@@ -23,7 +23,7 @@ class BackendUser extends AbstractEntity
     /**
      * @var string
      */
-    #[Extbase\Validate(['validator' => 'NotEmpty'])]
+    #[\TYPO3\CMS\Extbase\Attribute\Validate(validator: 'NotEmpty')]
     protected $userName = '';
 
     /**

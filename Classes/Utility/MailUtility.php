@@ -32,7 +32,7 @@ class MailUtility
         $message->setFrom([$senderEmail => 'Sender']);
         $message->setSubject($subject);
         $message->text($body);
-        $message->send();
+        \TYPO3\CMS\Core\Utility\GeneralUtility::makeInstance(\TYPO3\CMS\Core\Mail\MailerInterface::class)->send($message);
         return $message->isSent();
     }
 }
